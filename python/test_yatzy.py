@@ -81,7 +81,7 @@ def test_small_straight_scores_sum_of_dice_if_dice_reads_1_2_3_4_5():
     assert 0 == Yatzy.smallStraight(1, 2, 2, 4, 5)
 
 
-def test_largeStraight():
+def test_large_straight_scores_sum_of_dice_if_dice_reads_2_3_4_5_6():
     assert 20 == Yatzy.largeStraight(6, 2, 3, 4, 5)
     assert 20 == Yatzy.largeStraight(2, 3, 4, 5, 6)
     assert 0 == Yatzy.largeStraight(1, 2, 2, 4, 5)
