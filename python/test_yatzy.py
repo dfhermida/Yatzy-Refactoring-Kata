@@ -38,7 +38,7 @@ def test_fours_scores_sum_dice_reading_4():
     assert 4 == Yatzy(4, 5, 5, 5, 5).fours()
 
 
-def test_fives():
+def test_fives_scores_sum_dice_reading_5():
     assert 10 == Yatzy(4, 4, 4, 5, 5).fives()
     assert 15 == Yatzy(4, 4, 5, 5, 5).fives()
     assert 20 == Yatzy(4, 5, 5, 5, 5).fives()
