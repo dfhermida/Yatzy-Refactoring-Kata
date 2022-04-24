@@ -22,7 +22,7 @@ def test_ones_scores_sum_dice_reading_1():
     assert 4 == Yatzy.ones(1, 2, 1, 1, 1)
 
 
-def test_2s():
+def test_twos_scores_sum_dice_reading_2():
     assert 4 == Yatzy.twos(1, 2, 3, 2, 6)
     assert 10 == Yatzy.twos(2, 2, 2, 2, 2)
 
