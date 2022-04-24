@@ -56,7 +56,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def two_pair(d1, d2, d3, d4, d5):
+    def two_pairs(d1, d2, d3, d4, d5):
         counts = [0] * 6
         counts[d1 - 1] += 1
         counts[d2 - 1] += 1
