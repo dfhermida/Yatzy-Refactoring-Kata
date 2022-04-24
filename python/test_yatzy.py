@@ -56,7 +56,7 @@ def test_pair_scores_sum_two_highest_matching_dice():
     assert 12 == Yatzy.score_pair(5, 3, 6, 6, 5)
 
 
-def test_two_Pair():
+def test_two_pairs_scores_sum_mathing_dice_if_two_disctinct_pairs_0_otherwise():
     assert 16 == Yatzy.two_pair(3, 3, 5, 4, 5)
     assert 18 == Yatzy.two_pair(3, 3, 6, 6, 6)
     assert 0 == Yatzy.two_pair(3, 3, 6, 5, 4)
