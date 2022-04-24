@@ -1,170 +1,123 @@
 from typing import List
 
 
+class Roll:
+    def __init__(self, die_1: int, die_2: int, die_3: int, die_4: int, die_5: int):
+        self.dice = [die_1, die_2, die_3, die_4, die_5]
+
+    def sum(self) -> int:
+        return sum(self.dice)
+
+    def count_number(self, number: int) -> int:
+        return self.dice.count(number)
+
+    def get_number_that_repeat_exactly(self, times: int) -> int:
+        for number in [1, 2, 3, 4, 5, 6]:
+            if self.count_number(number) == times:
+                return number
+        return 0
+
+    def get_number_in_die_list_that_repeat_at_least(
+        self, roll: List[int], times: int
+    ) -> int:
+        for number in roll:
+            if self.count_number(number) >= times:
+                return number
+        return 0
+
+    def get_highest_number_that_repeat_at_least(self, times: int) -> int:
+        return self.get_number_in_die_list_that_repeat_at_least(
+            [6, 5, 4, 3, 2, 1], times
+        )
+
+    def get_lowest_number_that_repeat_at_least(self, times: int) -> int:
+        return self.get_number_in_die_list_that_repeat_at_least(
+            [1, 2, 3, 4, 5, 6], times
+        )
+
+    def has_number(self, number: int) -> bool:
+        return number in self.dice
+
+    def has_numbers(self, numbers) -> bool:
+        return all([self.has_number(number) for number in numbers])
+
+
 class Yatzy:
     @staticmethod
-    def chance(dice: List[int]):
-        return sum(dice)
+    def chance(roll: Roll) -> int:
+        return roll.sum()
 
     @staticmethod
-    def yatzy(dice):
-        counts = [0] * (len(dice) + 1)
-        for die in dice:
-            counts[die - 1] += 1
-        for i in range(len(counts)):
-            if counts[i] == 5:
-                return 50
+    def yatzy(roll: Roll) -> int:
+        if roll.get_highest_number_that_repeat_at_least(5) != 0:
+            return 50
+
         return 0
 
     @staticmethod
-    def ones(dice: List[int]):
-        return dice.count(1)
+    def ones(roll: Roll) -> int:
+        return roll.count_number(1)
 
     @staticmethod
-    def twos(d1, d2, d3, d4, d5):
-        dice = [d1, d2, d3, d4, d5]
-        return dice.count(2) * 2
+    def twos(roll: Roll) -> int:
+        return roll.count_number(2) * 2
 
     @staticmethod
-    def threes(d1, d2, d3, d4, d5):
-        dice = [d1, d2, d3, d4, d5]
-        return dice.count(3) * 3
-
-    def __init__(self, d1, d2, d3, d4, d5):
-        self.dice = [d1, d2, d3, d4, d5]
-
-    def fours(self):
-        return self.dice.count(4) * 4
-
-    def fives(self):
-        return self.dice.count(5) * 5
-
-    def sixes(self):
-        return self.dice.count(6) * 6
+    def threes(roll: Roll) -> int:
+        return roll.count_number(3) * 3
 
     @staticmethod
-    def pair(d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        at = 0
-        for at in range(6):
-            if counts[6 - at - 1] == 2:
-                return (6 - at) * 2
+    def fours(roll: Roll) -> int:
+        return roll.count_number(4) * 4
+
+    @staticmethod
+    def fives(roll: Roll) -> int:
+        return roll.count_number(5) * 5
+
+    @staticmethod
+    def sixes(roll: Roll) -> int:
+        return roll.count_number(6) * 6
+
+    @staticmethod
+    def pair(roll: Roll) -> int:
+        return 2 * roll.get_highest_number_that_repeat_at_least(2)
+
+    @staticmethod
+    def two_pairs(roll: Roll) -> int:
+        highest = roll.get_highest_number_that_repeat_at_least(2)
+        lowest = roll.get_lowest_number_that_repeat_at_least(2)
+        if highest != lowest:
+            return 2 * highest + 2 * lowest
+
         return 0
 
     @staticmethod
-    def two_pairs(d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        n = 0
-        score = 0
-        for i in range(6):
-            if counts[6 - i - 1] >= 2:
-                n = n + 1
-                score += 6 - i
-
-        if n == 2:
-            return score * 2
-        else:
-            return 0
+    def three_of_a_kind(roll: Roll) -> int:
+        return 3 * roll.get_highest_number_that_repeat_at_least(3)
 
     @staticmethod
-    def four_of_a_kind(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        for i in range(6):
-            if tallies[i] >= 4:
-                return (i + 1) * 4
+    def four_of_a_kind(roll: Roll) -> int:
+        return 4 * roll.get_highest_number_that_repeat_at_least(4)
+
+    @staticmethod
+    def small_straight(roll: Roll) -> int:
+        if roll.has_numbers([1, 2, 3, 4, 5]):
+            return roll.sum()
+
         return 0
 
     @staticmethod
-    def three_of_a_kind(d1, d2, d3, d4, d5):
-        t = [0] * 6
-        t[d1 - 1] += 1
-        t[d2 - 1] += 1
-        t[d3 - 1] += 1
-        t[d4 - 1] += 1
-        t[d5 - 1] += 1
-        for i in range(6):
-            if t[i] >= 3:
-                return (i + 1) * 3
+    def large_straight(roll: Roll) -> int:
+        if roll.has_numbers([2, 3, 4, 5, 6]):
+            return roll.sum()
+
         return 0
 
     @staticmethod
-    def smallStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (
-            tallies[0] == 1
-            and tallies[1] == 1
-            and tallies[2] == 1
-            and tallies[3] == 1
-            and tallies[4] == 1
-        ):
-            return 15
+    def full_house(roll: Roll) -> int:
+        three_of = roll.get_number_that_repeat_exactly(3)
+        two_of = roll.get_number_that_repeat_exactly(2)
+        if (three_of != 0) and (two_of != 0):
+            return roll.sum()
+
         return 0
-
-    @staticmethod
-    def largeStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (
-            tallies[1] == 1
-            and tallies[2] == 1
-            and tallies[3] == 1
-            and tallies[4] == 1
-            and tallies[5] == 1
-        ):
-            return 20
-        return 0
-
-    @staticmethod
-    def fullHouse(d1, d2, d3, d4, d5):
-        tallies = []
-        _2 = False
-        i = 0
-        _2_at = 0
-        _3 = False
-        _3_at = 0
-
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-
-        for i in range(6):
-            if tallies[i] == 2:
-                _2 = True
-                _2_at = i + 1
-
-        for i in range(6):
-            if tallies[i] == 3:
-                _3 = True
-                _3_at = i + 1
-
-        if _2 and _3:
-            return _2_at * 2 + _3_at * 3
-        else:
-            return 0
