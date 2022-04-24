@@ -42,7 +42,7 @@ class Yatzy:
         return self.dice.count(6) * 6
 
     @staticmethod
-    def score_pair(d1, d2, d3, d4, d5):
+    def pair(d1, d2, d3, d4, d5):
         counts = [0] * 6
         counts[d1 - 1] += 1
         counts[d2 - 1] += 1
