@@ -87,6 +87,6 @@ def test_large_straight_scores_sum_of_dice_if_dice_reads_2_3_4_5_6():
     assert 0 == Yatzy.largeStraight(1, 2, 2, 4, 5)
 
 
-def test_fullHouse():
+def test_full_house_scores_sum_of_dice_if_three_of_a_kind_and_two_of_a_kind():
     assert 18 == Yatzy.fullHouse(6, 2, 2, 2, 6)
     assert 0 == Yatzy.fullHouse(2, 3, 4, 5, 6)
