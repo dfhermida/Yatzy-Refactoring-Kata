@@ -75,7 +75,7 @@ def test_four_of_a_kind_scores_sum_four_matching_dice_0_otherwise():
     assert 0 == Yatzy.four_of_a_kind(3, 3, 3, 2, 1)
 
 
-def test_smallStraight():
+def test_small_straight_scores_sum_of_dice_if_dice_reads_1_2_3_4_5():
     assert 15 == Yatzy.smallStraight(1, 2, 3, 4, 5)
     assert 15 == Yatzy.smallStraight(2, 3, 4, 5, 1)
     assert 0 == Yatzy.smallStraight(1, 2, 2, 4, 5)
