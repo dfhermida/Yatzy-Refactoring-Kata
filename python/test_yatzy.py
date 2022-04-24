@@ -62,7 +62,7 @@ def test_two_pairs_scores_sum_mathing_dice_if_two_disctinct_pairs_0_otherwise():
     assert 0 == Yatzy.two_pair(3, 3, 6, 5, 4)
 
 
-def test_three_of_a_kind():
+def test_three_of_a_kind_scores_sum_three_matching_dice_0_otherwise():
     assert 9 == Yatzy.three_of_a_kind(3, 3, 3, 4, 5)
     assert 15 == Yatzy.three_of_a_kind(5, 3, 5, 4, 5)
     assert 9 == Yatzy.three_of_a_kind(3, 3, 3, 3, 5)
