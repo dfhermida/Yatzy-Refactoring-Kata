@@ -50,7 +50,7 @@ def test_sixes_scores_sum_dice_reading_6():
     assert 18 == Yatzy(6, 5, 6, 6, 5).sixes()
 
 
-def test_one_pair():
+def test_pair_scores_sum_two_highest_matching_dice():
     assert 6 == Yatzy.score_pair(3, 4, 3, 5, 6)
     assert 10 == Yatzy.score_pair(5, 3, 3, 3, 5)
     assert 12 == Yatzy.score_pair(5, 3, 6, 6, 5)
