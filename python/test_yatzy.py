@@ -27,7 +27,7 @@ def test_twos_scores_sum_dice_reading_2():
     assert 10 == Yatzy.twos(2, 2, 2, 2, 2)
 
 
-def test_threes():
+def test_threes_scores_sum_dice_reading_3():
     assert 6 == Yatzy.threes(1, 2, 3, 2, 3)
     assert 12 == Yatzy.threes(2, 3, 3, 3, 3)
 
