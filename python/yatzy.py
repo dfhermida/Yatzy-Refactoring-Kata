@@ -1,7 +1,9 @@
+from typing import List
+
+
 class Yatzy:
     @staticmethod
-    def chance(d1, d2, d3, d4, d5):
-        dice = [d1, d2, d3, d4, d5]
+    def chance(dice: List[int]):
         return sum(dice)
 
     @staticmethod
@@ -15,8 +17,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def ones(d1, d2, d3, d4, d5):
-        dice = [d1, d2, d3, d4, d5]
+    def ones(dice: List[int]):
         return dice.count(1)
 
     @staticmethod
